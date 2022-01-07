@@ -736,6 +736,7 @@ h1 {
   }
 
   .hero-section {
+    height: auto;
     min-height: auto;
   }
 
