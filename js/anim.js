@@ -2,10 +2,11 @@ window.onload = function(){
 
     var ua=window.navigator.userAgent, msie=ua.indexOf('MSIE '), trident=ua.indexOf('Trident/');
 
+    handleResize()
+
     // initial settings
     if (msie>0 || trident>0){ //dumb it down for IE11 and earlier
       gsap.timeline()
-      .set('.svg-centered', {x:document.body.clientWidth/2})
       .set('.hero-logo', {position:'absolute', top:150, left:'50%', x:-104})
       .set('#logo-txt', {y:15})
       .set('#logo-shadow', {y:1.5})
@@ -16,7 +17,6 @@ window.onload = function(){
     }
     else {
       gsap.timeline({onComplete:initAnim})
-      .set('.svg-centered', {x:document.body.clientWidth/2})
       .set('#logo-txt', {y:33})
       .set('#logo-shadow', {y:1.5})
       .set('.blobs g', {opacity:0.4})
@@ -28,8 +28,23 @@ window.onload = function(){
       }
     }
 
-    window.onresize = function(){
-      gsap.set('.svg-centered', {x:document.body.clientWidth/2})
+    window.addEventListener('resize', handleResize)
+
+    function handleResize(){
+      var _r = 1, //ratio for scaling
+          _w = document.body.clientWidth;
+      
+      gsap.set('.svg-centered', {x:_w/2});
+
+      // proportional scale + reposition of hero shapes beneath 625px wide
+      if (_w<625){ 
+        if (_w<375) _w = 375; // ...but don't scale beneath 375px wide
+        _r = _w/625; //update ratio
+      }
+
+      gsap.set('.hero-blobs', {transformOrigin:'52.5% 30%', scale:_r});
+      gsap.set('.hero-image-wrapper svg', {height:500*_r})
+      gsap.set('.hero-logo svg', {y:(_r-1)*200})
     }
 
     function initAnim(){
