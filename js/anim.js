@@ -42,8 +42,8 @@ window.onload = function(){
         _r = _w/625; //update ratio
       }
 
-      gsap.set('.hero-blobs', {transformOrigin:'52.5% 30%', scale:_r});
-      gsap.set('.hero-image-wrapper svg', {height:500*_r})
+      gsap.set('.hero-blobs', {transformOrigin:'52.5% 25%', scale:_r});
+      gsap.set('.hero-image-wrapper svg', {height:425*_r})
       gsap.set('.hero-logo svg', {y:(_r-1)*200})
     }
 
