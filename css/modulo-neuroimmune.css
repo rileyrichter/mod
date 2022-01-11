@@ -594,6 +594,10 @@ h1 {
   border-left: 1px solid #686681;
 }
 
+.hero-logo {
+  cursor: pointer;
+}
+
 /*.hero-logo {
   position: absolute;
   left: 50%;
